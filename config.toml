@@ -1,0 +1,24 @@
+# Includes one of the default files in src/bootstrap/defaults
+profile = "compiler"
+changelog-seen = 2
+
+[llvm]
+targets = "Mips;X86"
+ccache = true
+assertions = true
+optimize = false
+download-ci-llvm = false
+
+[build]
+compiler-docs = false
+target = [
+    "x86_64-apple-darwin",
+]
+
+[rust]
+debug = true
+debuginfo-level = 2
+debug-logging = true
+backtrace-on-ice = true
+lto = "off"
+
