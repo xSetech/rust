@@ -21,4 +21,4 @@ debuginfo-level = 2
 debug-logging = true
 backtrace-on-ice = true
 lto = "off"
-
+optimize = false
