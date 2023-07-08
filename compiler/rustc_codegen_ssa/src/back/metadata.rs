@@ -188,7 +188,7 @@ pub(crate) fn create_object_file(sess: &Session) -> Option<write::Object<'static
         Endian::Little => Endianness::Little,
         Endian::Big => Endianness::Big,
     };
-    let architecture: Architecture = match &sess.target.arch[..] {
+    let architecture = match &sess.target.arch[..] {
         "arm" => Architecture::Arm,
         "aarch64" => {
             if sess.target.pointer_width == 32 {
@@ -248,8 +248,8 @@ pub(crate) fn create_object_file(sess: &Session) -> Option<write::Object<'static
                 s if s.contains("r6") => elf::EF_MIPS_ARCH_32R6,
                 _ => elf::EF_MIPS_ARCH_32R2,
             };
-            // The only ABI LLVM supports for 32-bit MIPS CPUs is o32, n32.
-            let mut e_flags = elf::EF_MIPS_CPIC | elf::EF_MIPS_ABI_O32 | elf::EF_MIPS_ABI2 | arch;
+            // The only ABI LLVM supports for 32-bit MIPS CPUs is o32.
+            let mut e_flags = elf::EF_MIPS_CPIC | elf::EF_MIPS_ABI_O32 | arch;
             if sess.target.options.relocation_model != RelocModel::Static {
                 e_flags |= elf::EF_MIPS_PIC;
             }
