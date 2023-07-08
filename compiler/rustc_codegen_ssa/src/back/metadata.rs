@@ -178,6 +178,11 @@ pub(super) fn get_metadata_xcoff<'a>(path: &Path, data: &'a [u8]) -> Result<&'a 
     };
 }
 
+// BUG: The problem here is that symbols.o has ELF header flags that differ from
+// the other objects passed to the linker, leading the linker to freak out. This
+// is a bit silly, since the symbols file here doesn't contain any code. The
+// task is simply to match what the other object files have, rather than try to
+// guess imperfectly. -sj
 pub(crate) fn create_object_file(sess: &Session) -> Option<write::Object<'static>> {
     let endianness = match sess.target.options.endian {
         Endian::Little => Endianness::Little,
