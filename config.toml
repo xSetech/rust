@@ -6,7 +6,7 @@ changelog-seen = 2
 targets = "Mips;X86"
 ccache = true
 assertions = true
-optimize = false
+optimize = true
 download-ci-llvm = false
 
 [build]
@@ -21,4 +21,4 @@ debuginfo-level = 2
 debug-logging = true
 backtrace-on-ice = true
 lto = "off"
-optimize = false
+optimize = true
