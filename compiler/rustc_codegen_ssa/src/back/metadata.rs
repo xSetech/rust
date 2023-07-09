@@ -22,6 +22,8 @@ use rustc_session::Session;
 use rustc_target::abi::Endian;
 use rustc_target::spec::{ef_avr_arch, RelocModel, Target};
 
+use crate::CodegenResults;
+
 /// The default metadata loader. This is used by cg_llvm and cg_clif.
 ///
 /// # Metadata location
