@@ -1856,15 +1856,16 @@ fn add_linked_symbol_object(
     cmd: &mut dyn Linker,
     sess: &Session,
     tmpdir: &Path,
+    codegen_results: &CodegenResults,
     symbols: &[(String, SymbolExportKind)],
 ) {
     if symbols.is_empty() {
         return;
     }
 
-    let Some(mut file) = super::metadata::create_object_file(sess) else {
-        return;
-    };
+    let mut file = super::metadata::create_matching_elf_object_file(codegen_results)
+        .or_else(|| super::metadata::create_object_file(sess))
+        .unwrap_or_else(|| return);
 
     // NOTE(nbdd0121): MSVC will hang if the input object file contains no sections,
     // so add an empty section.
@@ -2069,6 +2070,7 @@ fn linker_with_args<'a>(
         cmd,
         sess,
         tmpdir,
+        codegen_results,
         &codegen_results.crate_info.linked_symbols[&crate_type],
     );
 
