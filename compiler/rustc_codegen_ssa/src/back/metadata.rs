@@ -183,7 +183,7 @@ pub(super) fn get_metadata_xcoff<'a>(path: &Path, data: &'a [u8]) -> Result<&'a 
 /// Creates an ELF object file that matches other files to be passed to the link
 /// command, if those other files are also an ELF. If the other files are not an
 /// ELF, this function returns None and create_object_file() should be used.
-pub(crate) fn create_matching_elf_object_file(_codegen_results: &CodegenResults) -> Option<write::Object<'static>> {
+pub(crate) fn create_matching_elf_object_file(codegen_results: &CodegenResults) -> Option<write::Object<'static>> {
     None
 }
 
