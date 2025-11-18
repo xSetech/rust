@@ -127,6 +127,7 @@ impl TestCx<'_> {
 
             // write debugger script
             let mut script_str = String::with_capacity(2048);
+            script_str.push_str(&format!("set startup-with-shell off\n"));
             script_str.push_str(&format!("set charset {}\n", Self::charset()));
             script_str.push_str(&format!("set sysroot {}\n", &self.config.android_cross_path));
             script_str.push_str(&format!("file {}\n", exe_file));
@@ -226,6 +227,7 @@ impl TestCx<'_> {
             let rust_pp_module_abs_path = self.config.src_root.join("src").join("etc");
             // write debugger script
             let mut script_str = String::with_capacity(2048);
+            script_str.push_str(&format!("set startup-with-shell off\n"));
             script_str.push_str(&format!("set charset {}\n", Self::charset()));
             script_str.push_str("show version\n");
 
